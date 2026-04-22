@@ -1,10 +1,10 @@
-import { schema } from "@/schemas/PersonalInpt";
+import { phoneVerificationRequestSchema } from "@/schemas/VerificationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
 import z from "zod";
 
 //유효성을 통해서 타입 추론
-type FormValues = z.infer<typeof schema>
+type FormValues = z.infer<typeof phoneVerificationRequestSchema>
 
 type Action =
     | { type: "REQUEST_VERIFICATION" }
@@ -16,7 +16,7 @@ export default function PhoneVerificationRequest({ phone, dispatch }: { phone: s
         handleSubmit,
         formState: { errors }
     } = useForm<FormValues>({
-        resolver: zodResolver(schema)
+        resolver: zodResolver(phoneVerificationRequestSchema)
     });
 
     const onSubmit = (data: FormValues) => {

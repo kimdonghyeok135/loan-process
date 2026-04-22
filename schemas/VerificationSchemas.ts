@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const schema = z.object({
+export const phoneVerificationRequestSchema = z.object({
     name: z.string().min(1, "이름을 입력해주세요"),
     residentRegistrationFront: z.
         string()
@@ -17,4 +17,8 @@ export const schema = z.object({
     carrier: z
         .string()
         .min(1, "통신사를 선택해주세요.")
+})
+
+export const verificationCodeSchema = z.object({
+    code: z.string().min(6, "인증번호를 6자리 입력해주세요").regex(/^\d+$/, "숫자만 입력 가능합니다.")
 })
