@@ -5,12 +5,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import VerificationCodeTimer from "./VerificationCodeTimer";
+import { useRouter } from "next/navigation";
 
 //유효성을 통해서 타입 추론
 type FormValues = z.infer<typeof verificationCodeSchema>
 
 export default function PhoneVerificationRequest() {
-
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -19,7 +20,13 @@ export default function PhoneVerificationRequest() {
         resolver: zodResolver(verificationCodeSchema)
     });
     const onSubmit = (data: FormValues) => {
-        console.log(data)
+        //SERVER SIDE에서 판단 해야 맞음.
+        if (data.code === "111111") {
+            console.log("성공 케이스")
+            router.replace("/terms")
+        } else {
+            console.log("실패 케이스")
+        }
     }
     return (<>
 
@@ -45,7 +52,9 @@ export default function PhoneVerificationRequest() {
             <div className="mt-auto pt-8">
                 <button
                     type="submit"
-                    className="w-full rounded-2xl bg-gray-900 px-4 py-4 text-base font-semibold text-white transition hover:bg-black"
+                    className="w-full rounded-2xl bg-gray-900 px-4 py-4 text-base font-semibold text-white transition hover:bg-black
+                    hover:text-gray-700 active:scale-90
+                    duration-150 ease-out"
                 >
                     다음
                 </button>

@@ -54,7 +54,8 @@ export default function VerificationCodeTimer() {
 
                 <button
                     type="button"
-                    className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 active:scale-90
+                    className="flex items-center gap-1 text-sm font-medium text-blue-600 
+                    hover:text-blue-700 active:scale-90
                     transition duration-150 ease-out"
                     onClick={onClickResend}
                 >
