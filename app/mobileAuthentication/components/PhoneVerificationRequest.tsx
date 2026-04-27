@@ -1,3 +1,4 @@
+import NextBtn from "@/components/NextBtn";
 import { phoneVerificationRequestSchema } from "@/schemas/VerificationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
@@ -125,17 +126,7 @@ export default function PhoneVerificationRequest({ phone, dispatch }: { phone: s
                     {errors.carrier && <p className="text-red-500 text-sm">{errors.carrier.message}</p>}
                 </div>
             </section>
-            <div className="mt-auto pt-8">
-                <button
-                    type="submit"
-                    className="w-full rounded-2xl bg-gray-900 px-4 py-4 text-base font-semibold text-white transition 
-                    hover:text-gray-700 active:scale-90
-                    transition duration-150 ease-out
-                    "
-                >
-                    다음
-                </button>
-            </div>
+            <NextBtn title="인증번호 받기" />
         </form>
 
 

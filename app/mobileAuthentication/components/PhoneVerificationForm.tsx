@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 import VerificationCodeTimer from "./VerificationCodeTimer";
 import { useRouter } from "next/navigation";
+import NextBtn from "@/components/NextBtn";
 
 //유효성을 통해서 타입 추론
 type FormValues = z.infer<typeof verificationCodeSchema>
@@ -49,16 +50,7 @@ export default function PhoneVerificationRequest() {
                 </div>
             </section>
             <VerificationCodeTimer />
-            <div className="mt-auto pt-8">
-                <button
-                    type="submit"
-                    className="w-full rounded-2xl bg-gray-900 px-4 py-4 text-base font-semibold text-white transition hover:bg-black
-                    hover:text-gray-700 active:scale-90
-                    duration-150 ease-out"
-                >
-                    다음
-                </button>
-            </div>
+            <NextBtn title="인증하기" />
         </form>
 
     </>)
