@@ -44,7 +44,7 @@ export default function PdfAgreementOverlay({
                     onClick={onAgree}
                     className="w-full rounded-2xl bg-gray-900 py-4 text-sm font-semibold text-white active:scale-[0.98]"
                 >
-                    내용을 확인하고 동의합니다
+                    확인
                 </button>
             </footer>
         </div>

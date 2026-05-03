@@ -4,6 +4,7 @@ import RequiredTermsSection from "./components/RequiredTermsSection";
 import OptionalTermsSection from "./components/OptionalTermsSection";
 import ConsentAllToggle from "./components/ConsentAllToggle";
 import NextBtn from "@/components/NextBtn";
+import { useState } from "react";
 /**
  * 약관 동의 페이지
  * - 필수 동의 항목과 선택 동의 항목으로 구분하여 표시
@@ -11,6 +12,7 @@ import NextBtn from "@/components/NextBtn";
  * 
  */
 export default function Terms() {
+    const [allChecked, setAllChecked] = useState<boolean>(false);
     return (
         <main className="min-h-screen bg-gray-50">
             <div className="mx-auto flex min-h-screen w-full max-w-md flex-col px-5 py-8 pb-28">
@@ -27,10 +29,10 @@ export default function Terms() {
                 </header>
 
                 <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-                    <ConsentAllToggle />
+                    <ConsentAllToggle allChecked={allChecked} setAllChecked={setAllChecked} />
 
                     <GroupTitle title="필수 동의" />
-                    <RequiredTermsSection />
+                    <RequiredTermsSection allChecked={allChecked} />
 
                     <div className="my-6 h-px bg-gray-100" />
 
