@@ -6,14 +6,18 @@ import PdfAgreementOverlay from "./PdfAgreementOverlay";
 
 type ConsentItemProps = {
     label: string,
-    required?: boolean,
-    allChecked: boolean
+    required: boolean,
+    allChecked: boolean,
+    value: string
+    handleRequiredTermChange: (value: string, checked: boolean) => void
 }
 
 export default function ConsentItem({
     label,
     required = false,
-    allChecked
+    allChecked,
+    value,
+    handleRequiredTermChange
 }: ConsentItemProps) {
 
     const [selectedAgreement, setSelectedAgreement] = useState<string | null>(null);
@@ -28,12 +32,26 @@ export default function ConsentItem({
         setSelectedAgreement(label);
         setViewPdf(true);
     }
+    const onChangeTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked((prev) => !prev)
+        handleRequiredTermChange(e.currentTarget.value, e.currentTarget.checked)
+    }
     return (
         <>
             <div className="flex items-center justify-between rounded-2xl border border-slate-200 px-4 py-4" >
-                <div className="flex items-center gap-3" onClick={() => { setChecked((prev) => !prev) }}>
-                    <span className={`flex h-5 w-5 items-center justify-center rounded-full border 
-                     ${checked ? "bg-slate-900 text-white" : "border-slate-300 text-slate-400"}`}>
+                <label className="flex w-full cursor-pointer items-center gap-3 text-left transition active:scale-[0.98]">
+                    <input
+                        type="checkbox"
+                        value={value}
+                        checked={checked}
+                        onChange={onChangeTerm}
+                        className="sr-only"
+                    />
+
+                    <span
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border 
+      ${checked ? "bg-slate-900 text-white" : "border-slate-300 text-slate-400"}`}
+                    >
                         <Check size={12} strokeWidth={3} />
                     </span>
 
@@ -43,7 +61,7 @@ export default function ConsentItem({
                         </span>
                         {label}
                     </span>
-                </div>
+                </label>
 
                 <ChevronRight onClick={() => handlerPdf(label)} className="h-4 w-4 text-slate-400" />
             </div>

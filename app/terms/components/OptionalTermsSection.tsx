@@ -1,11 +1,24 @@
 import ConsentItem from "@/components/terms/ConsetnItem";
+import { initialRequiredTerms } from "@/constants/terms";
 
-export default function OptionalTermsSection() {
+type OptionalTermsSectionProps = {
+    handleRequiredTermChange: (value: string, checked: boolean) => void
+}
+
+export default function OptionalTermsSection({ handleRequiredTermChange }: OptionalTermsSectionProps) {
     return (<>
 
         <div className="space-y-3">
-            <ConsentItem label="마케팅 정보 수신 동의" />
-            <ConsentItem label="혜택 및 이벤트 안내 동의" />
+            {initialRequiredTerms.filter((term) => !term.required).map((item) => (
+                <div key={item.value}>
+                    <ConsentItem required={false} label={item.title} value={item.value}
+                        allChecked={false}
+
+                        handleRequiredTermChange={handleRequiredTermChange} />
+                </div>
+            ))}
         </div>
     </>)
 }
+
+// constants/terms.ts에서 정의한 약관 동의문만 그리게 수정

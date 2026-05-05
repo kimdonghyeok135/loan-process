@@ -1,16 +1,25 @@
 import ConsentItem from "@/components/terms/ConsetnItem";
+import { initialRequiredTerms } from "@/constants/terms";
+
+
 
 type RequiredTermsSectionProps = {
-    allChecked: boolean
+    allChecked: boolean;
+    handleRequiredTermChange: (value: string, checked: boolean) => void
 }
 
-export default function RequiredTermsSection({ allChecked }: RequiredTermsSectionProps) {
+export default function RequiredTermsSection({ allChecked, handleRequiredTermChange }: RequiredTermsSectionProps) {
     return (<>
         <div className="space-y-3">
-            <ConsentItem required label="개인정보 수집 및 이용 동의" allChecked={allChecked} />
-            <ConsentItem required label="고유식별정보 처리 동의" allChecked={allChecked} />
-            <ConsentItem required label="통신사 이용약관 동의" allChecked={allChecked} />
-            <ConsentItem required label="본인확인 서비스 이용약관 동의" allChecked={allChecked} />
+            {initialRequiredTerms.filter((term) => term.required).map((item) => (
+                <div key={item.value}>
+                    <ConsentItem required label={item.title} value={item.value}
+                        allChecked={allChecked}
+                        handleRequiredTermChange={handleRequiredTermChange} />
+                </div>
+            ))}
         </div>
     </>)
 }
+
+// constants/terms.ts에서 정의한 약관 동의문만 그리게 수정
